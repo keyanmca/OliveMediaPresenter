@@ -1,15 +1,15 @@
 ﻿<Window x:Class="OliveMediaPlayer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CBC Media Presenter" Height="350" Width="525" 
+        Title="Olive Media Player" Height="400" Width="600" 
         Background="Black" 
         WindowState="Maximized" 
         WindowStyle="None"
         KeyUp="Window_KeyUp"
         Topmost="False"
         Cursor="None">
-    
+
     <Grid Name="mainGrid">
-        <MediaElement Name="mainMediaElement" LoadedBehavior="Manual" Opacity="1.0" MediaEnded="mainMediaElement_MediaEnded" Volume="1" />
+        <MediaElement Name="PlayerMediaElement" LoadedBehavior="Manual" Opacity="1.0" MediaEnded="PlayerMediaElement_MediaEnded" Volume="1" />
     </Grid>
 </Window>
