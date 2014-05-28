@@ -28,9 +28,9 @@ namespace OliveMediaPlayer
 
         private void LoadFiles()    // loads the video files 
         {
-            String videoDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "Presentation"); // On Windows 7 it would be C:\users\<username>\Video\Presentation to get the files from
+            String videoDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "OliveMediaPresenter"); // On Windows 7 it would be C:\users\<username>\Video\Presentation to get the files from
 
-            if (System.IO.Directory.Exists(videoDir))
+            if (System.IO.Directory.Exists(videoDir) && System.IO.Directory.GetFiles(videoDir, "*.???").Count() > 0)
             {
                 var files = from p in System.IO.Directory.GetFiles(videoDir)
                             where Path.GetExtension(p) == ".wmv" || Path.GetExtension(p) == ".mp4" || Path.GetExtension(p) == ".m4v" || Path.GetExtension(p) == ".avi"
@@ -137,16 +137,19 @@ namespace OliveMediaPlayer
                     loop = !loop;
                     break;
                 case Key.Space: // space pressed: start next element if one is selected, otherwise start or stop media
-                    if (PlayerMediaElement.Source == fileList[nextVideo])
+                    if (fileList.Count > 0)
                     {
-                        PlayerMediaElement.Play();
-                    }
-                    else
-                    {
-                        PlayerMediaElement.Stop();
-                        PlayerMediaElement.Close();
-                        PlayerMediaElement.Source = fileList[nextVideo];
-                        PlayerMediaElement.Play();
+                        if (PlayerMediaElement.Source == fileList[nextVideo])
+                        {
+                            PlayerMediaElement.Play();
+                        }
+                        else
+                        {
+                            PlayerMediaElement.Stop();
+                            PlayerMediaElement.Close();
+                            PlayerMediaElement.Source = fileList[nextVideo];
+                            PlayerMediaElement.Play();
+                        }
                     }
                     break;
                 case Key.S: // S pressed: stop media playback
